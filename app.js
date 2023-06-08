@@ -21,6 +21,7 @@ app.post("/", function (req, res) {
     response.on("data", function (data) {
       const weatherData = JSON.parse(data);
       const temp = weatherData.main.temp;
+      const humidity = weatherData.main.humidity;
       const weatherDescription = weatherData.weather[0].description;
       const icon = weatherData.weather[0].icon;
       const imageURL = "https://openweathermap.org/img/wn/" + icon + "@2x.png"
@@ -28,6 +29,7 @@ app.post("/", function (req, res) {
       // console.log("The weather is currently: " + weatherDescription);
       res.write("<h1>Temperature in " + query + " is: " + temp + " Degrees Celcius</h1>");
       res.write("<h3>The weather is currently: " + weatherDescription + "</h3>");
+      res.write("<h3>The Humidity is: " + humidity + " g.m-3</h3>");
       res.write("<image src=" + imageURL + ">");
       res.send();
       //Remember that we can use res.send() only once. If we use it twice, Our App will get crashed.
